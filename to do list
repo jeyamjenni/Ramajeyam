@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="toDoList">
+    <div class="container">
+        <h3 class="toDoList-title">To do list</h3>
+        <input type="text" class="toDoList-input" placeholder="Add a to-do">
+        <div class="toDoList-btnContainer">
+            <button class="toDoList-btn">SUBMIT➕</button>
+            <button class="toDoList-btn delete">DELETE🗑</button>
+        </div>
+        <div class="toDoList-container">
+            <h4 class="toDoList-containerTitle">Lists :</h4>
+            <ul class="toDoList-listAdd">
+
+            </ul>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        var input = document.querySelector('.toDoList-input');
+        var list = document.querySelector('.toDoList-listAdd');
+        var btn = document.querySelector('.toDoList-btn');
+        var checks = document.querySelector('.toDoList-check');
+        var removeList = document.querySelector('.toDoList-listRemove');
+        var deleteButton = document.querySelector('.delete');
+        var listTab = [];
+        var addToDo = function() {
+                if (input.value) {
+                    var newListItem = document.createElement('li');
+                    var checkbox = document.createElement('input');
+                    var label = document.createElement('label');
+                    checkbox.setAttribute('type', 'checkbox');
+                    checkbox.classList.add('toDoList-check');
+                    newListItem.appendChild(checkbox);
+                    newListItem.appendChild(label);
+                    var valueList = document.createTextNode(input.value);
+                    label.appendChild(valueList);
+                    newListItem.classList.add('toDoList-listItem');
+                    list.appendChild(newListItem);
+                    input.value = "";
+                }
+            }
+        btn.addEventListener('click', function() {
+            addToDo();
+        });
+        window.addEventListener('keydown', function(event) {
+            if (event.keyCode === 13) {
+                addToDo();
+            };
+        });
+        deleteButton.addEventListener('click', () => 
+        {
+            var listDel = document.querySelectorAll('.toDoList-listItem')
+            for (let i = 0; i < listDel.length; i++)
+             {
+                const listDelElem = listDel[i];
+
+                if (listDelElem.querySelector('.toDoList-check').checked) 
+                {
+                    listDelElem.remove();
+                }
+            };
+        })
+    </script>
+</body>
+
+</html>
